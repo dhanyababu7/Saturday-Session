@@ -116,4 +116,19 @@ class ProductTemplate(models.Model):
 
         print("Grouped Attribute Mapping:", list(attribute_mapping.values()))
 
+        # Fetch attribute values used in product templates linked to variant templates
+        pr_templates = self.env['product.template'].search([
+            ('variant_template_id', '!=', False)
+        ])
+        attribute_values = pr_templates.mapped('attribute_line_ids.value_ids')
+        # print(attribute_values)
+        # Collect corresponding ids and names
+        value_data = [
+            {'id': value.id, 'name': value.name,
+             'attribute_id': value.attribute_id.id}
+            for value in attribute_values
+        ]
 
+        print("Related Attribute Values:", value_data)
+
+        return value_data
