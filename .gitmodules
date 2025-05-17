@@ -1,0 +1,3 @@
+[submodule "subrepos/sample-repo"]
+	path = subrepos/sample-repo
+	url = https://github.com/dhanyababu7/Saturday-Session.git
